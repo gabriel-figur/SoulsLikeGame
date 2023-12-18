@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace GF
+{
+    public class AnimatorHandler : MonoBehaviour
+    {
+        public Animator animator;
+        private int vertical;
+        private int horizontal;
+        public bool canRotate;
+
+        public void Initialize()
+        {
+            animator = GetComponent<Animator>();
+            vertical = Animator.StringToHash("Vertical");
+            horizontal = Animator.StringToHash("Horizontal");
+        }
+
+        public void UpdateAnimatorValue(float verticalMovement, float horizontalMovement)
+        {
+            #region Vertical
+            float v = 0;
+
+            if (verticalMovement > 0 && verticalMovement < 0.55f)
+            {
+                v = 0.5f;
+            }
+            else if (verticalMovement > 0.55f)
+            {
+                v = 1;
+            }
+            else if (verticalMovement < 0 && verticalMovement > -0.55f)
+            {
+                v = -0.5f;
+            }
+            else if (verticalMovement < -0.55f)
+            {
+                v = -1;
+            }
+            else
+            {
+                v = 0;
+            }
+            #endregion
+
+            #region horizontal
+
+            float h = 0;
+            
+
+            #endregion
+        }
+    }
+}
