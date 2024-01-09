@@ -12,6 +12,7 @@ namespace GF
         private Vector3 moveDirection;
 
         [HideInInspector] public Transform myTransform;
+        [HideInInspector] public AnimatorHandler animatorHandler;
 
         public new Rigidbody rigidbody;
         public GameObject normalCamera;
@@ -23,8 +24,10 @@ namespace GF
         {
             rigidbody = GetComponent<Rigidbody>();
             inputHandler = GetComponent<InputHandler>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
             cameraObject = Camera.main.transform;
             myTransform = transform;
+            animatorHandler.Initialize();
         }
 
         public void Update()
@@ -42,6 +45,13 @@ namespace GF
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
             rigidbody.velocity = projectedVelocity;
+
+            animatorHandler.UpdateAnimatorValue(inputHandler.moveAmount, 0);
+            
+            if (animatorHandler.canRotate)
+            {
+                HandleRotation(delta);
+            }
         }
 
         #region Movement

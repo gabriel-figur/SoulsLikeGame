@@ -20,7 +20,7 @@ namespace GF
 
         public void UpdateAnimatorValue(float verticalMovement, float horizontalMovement)
         {
-            #region Vertical
+            #region vertical
             float v = 0;
 
             if (verticalMovement > 0 && verticalMovement < 0.55f)
@@ -46,11 +46,42 @@ namespace GF
             #endregion
 
             #region horizontal
-
             float h = 0;
-            
 
+            if (horizontalMovement > 0 && horizontalMovement < 0.55f)
+            {
+                h = 0.5f;
+            }
+            else if (horizontalMovement > 0.55f)
+            {
+                h = 1;
+            }
+            else if (horizontalMovement < 0 && horizontalMovement > -0.55f)
+            {
+                h = -0.5f;
+            }
+            else if (horizontalMovement < -0.55f)
+            {
+                h = -1;
+            }
+            else
+            {
+                h = 0;
+            }
             #endregion
+
+            animator.SetFloat(vertical, v, 0.1f, Time.deltaTime);
+            animator.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
+        }
+
+        public void CanRotate()
+        {
+            canRotate = true;
+        }
+
+        public void StopRatation()
+        {
+            canRotate = false;
         }
     }
 }
